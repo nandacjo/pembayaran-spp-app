@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BerandaWaliController;
 use App\Http\Controllers\BerandaOperatorController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WaliController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('operator')->middleware(['auth', 'auth.operator'])->group(function () {
     Route::get('beranda', [BerandaOperatorController::class, 'index'])->name('operator.beranda');
     Route::resource('user', UserController::class);
+    Route::resource('wali', WaliController::class);
 });
  
 Route::prefix('wali')->middleware(['auth', 'auth.wali'])->group(function () {

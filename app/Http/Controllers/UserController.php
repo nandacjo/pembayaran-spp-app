@@ -9,6 +9,11 @@ use function Ramsey\Uuid\v1;
 
 class UserController extends Controller
 {
+    private $viewIndex = 'user_index';
+    private $viewCreate = 'user_form';
+    private $viewEdit = 'user_form';
+    private $viewShow = 'user_show';
+    private $routePrefix = 'user';
     /**
      * Display a listing of the resource.
      *
@@ -17,12 +22,13 @@ class UserController extends Controller
     public function index()
     {
         // simbol <> tidak sama dengan
-     
-        return view('operator.user_index', [
-            'models' =>   $models = Model::where('akses', '<>', 'wali')->latest()->paginate(50)
+
+        return view('operator.'. $this->viewIndex, [
+            'models' =>   $models = Model::where('akses', '<>', 'wali')->latest()->paginate(50),
+            'routePrefix' => $this->routePrefix,
+            'title' => 'DATA USER',
         ]);
-        
-    } 
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -32,13 +38,15 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'model' => new \App\Models\User(),
+            'model' => new Model(),
             'method' => 'POST',
-            'route' => 'user.store',
+            'route' => $this->routePrefix . '.store',
             'button' => 'SIMPAN',
+            'title' => 'CREATE DATA USER'
+
         ];
-        
-        return view('operator.user_form', $data);
+
+        return view('operator.'. $this->viewCreate, $data);
     }
 
     /**
@@ -85,7 +93,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'model' => Model::findOrFail($id),
+            'method' => 'PUT',
+            'route' => [$this->routePrefix . '.update', $id],
+            'button' => 'UPDATE',
+            'title' => 'CREATE DATA USER'
+
+        ];
+
+        return view('operator.' . $this->viewEdit, $data);
     }
 
     /**
@@ -97,7 +114,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $requestData = $request->validate([
+            'name' => 'required',
+            'nohp' => 'required|unique:users,nohp,'. $id,
+            'akses' => 'required|in:operator,admin',
+            'email' => 'required|unique:users,email,'. $id,
+            'password' => 'nullable',
+        ]);
+
+        $model = Model::findOrFail($id);
+        if ($requestData['password'] == "") {
+            unset($requestData['password']);
+        } else {
+            $requestData['password'] = bcrypt($requestData['password']);
+        }
+        $model->fill($requestData);
+        $model->save();
+        flash('Data berhasil diubah');
+        return redirect()->route($this->routePrefix . '.index');
     }
 
     /**
@@ -108,6 +142,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = Model::findOrFail($id);
+
+        if ($model->id === 1) {
+            flash('Data tidak bisa dihapus')->error();
+        }
+
+        $model->delete();
+        flash('Data berhsil dihapus');
+        return back();
     }
 }
