@@ -12,13 +12,49 @@
 
 namespace App\Models{
 /**
+ * App\Models\Siswa
+ *
+ * @property int $id
+ * @property int|null $wali_id
+ * @property string|null $wali_status
+ * @property string $nama
+ * @property string $nisn
+ * @property string $jurusan
+ * @property string $kelas
+ * @property string $angkatan
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $user
+ * @property-read \App\Models\User|null $wali
+ * @method static \Database\Factories\SiswaFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereAngkatan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereJurusan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereKelas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNisn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereWaliId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereWaliStatus($value)
+ */
+	class Siswa extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
  * @property string $name
- * @property string $akses
  * @property string $nohp
- * @property string $nohp_verified_at
+ * @property string|null $nohp_verified_at
+ * @property string $akses
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password

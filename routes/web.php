@@ -29,6 +29,7 @@ Route::prefix('operator')->middleware(['auth', 'auth.operator'])->group(function
     Route::get('beranda', [BerandaOperatorController::class, 'index'])->name('operator.beranda');
     Route::resource('user', UserController::class);
     Route::resource('wali', WaliController::class);
+    Route::resource('siswa', SiswaController::class);
 });
  
 Route::prefix('wali')->middleware(['auth', 'auth.wali'])->group(function () {
