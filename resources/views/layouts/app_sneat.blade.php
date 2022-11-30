@@ -39,7 +39,13 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('sneat') }}/assets/js/config.js"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('font/css/all.min.css') }}">
+
+    <!-- Select 2 CSS -->
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
 </head>
 
 <body>
@@ -299,6 +305,20 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- Select 2 JS -->
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: 'Pilih nama wali murid',
+                allowClear: true,
+            });
+        });
+    </script>
+
 </body>
 
 </html>

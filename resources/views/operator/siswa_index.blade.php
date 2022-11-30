@@ -24,12 +24,12 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->wali->name }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->nama }}</td>
                                 <td>{{ $item->nisn }}</td>
                                 <td>{{ $item->jurusan }}</td>
                                 <td>{{ $item->kelas }}</td>
                                 <td>{{ $item->angkatan }}</td>
-                                <td>
+                                 <td>
 
                                     {!! Form::open([
                                     'route' => [ $routePrefix . '.destroy', $item->id],
@@ -37,12 +37,12 @@
                                     'onsubmit' => 'return confirm("Yakin ingin menghapus data ini?")',
                                     ]) !!}
                                     <a href="{{ route( $routePrefix . '.edit', $item->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-edit"></i> Edit </a>
+                                    <a href="{{ route( $routePrefix . '.show', $item->id) }}" class="btn btn-info btn-sm"> <i class="fa fa-edit"></i> Detail </a>
 
                                     <button type="submit" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i> Hapus
                                     </button>
                                     {!! Form::close() !!}
-
                                 </td>
                             </tr>
                             @empty
