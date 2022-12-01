@@ -240,7 +240,14 @@
         <div class="content-wrapper">
           <!-- Content -->
 
-          <div class="container-xxl flex-grow-1 container-p-y">
+          <div class="container-xxl flex-grow-1 container-p-y"> 
+            {{--  menampilkan error secara global  --}}
+            @if($errors->any())
+              <div class="alert alert-danger">
+                {!! implode('', $errors->all('<div>:message</div>')) !!}
+              </div>
+            @endif
+            {{--  end  --}}
             @include('flash::message')
             @yield('content')
           </div>

@@ -36,6 +36,21 @@
               </tr>
             </thead>
           </table>
+          
+          {{--  Form tambah data siswa  --}}
+          <h5 class="my-3">TAMBAH DATA ANAK</h5>
+          {!! Form::open(['route' => 'walisiswa.store', 'method' => 'POST']) !!}
+          {!! Form::hidden('wali_id', $model->id, []) !!}
+          <div class="form-group">
+            <label for="siswa_id">Pilih Data Siswa</label>
+            {!! Form::select('siswa_id', $siswa, null, ['class' =>'form-control select2']) !!}
+            <span class="text-danger">{{ $errors->first('siswa_id') }}</span>
+          </div>
+          {!! Form::submit('SIMPAN', ['class' => 'btn btn-sm btn-primary my-2']) !!}
+          {!! Form::close() !!}
+          {{--  end from tambah data siswa  --}}
+
+
           <h5 class="my-4">DATA ANAK</h5>
           <table class="table table-light">
             <thead>
@@ -43,16 +58,30 @@
                 <th>ID</th>
                 <th>NISN</th>
                 <th>NAMA</th>
+                <th>AKSI</th>
               </tr>
             </thead>
             <tbody>
-             @foreach ($model->siswa as $item)
-             <tr>
-              <td>{{ $loop->iteration }}</td>
-              <td>{{ $item->nisn }}</td>
-              <td>{{ $item->nama }}</td>
-            </tr>
-             @endforeach
+              @foreach ($model->siswa as $item)
+              <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->nisn }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>
+                  {!! Form::open([
+                    'route' => ['walisiswa.update', $item->id],
+                    'method' => 'PUT',
+                    'onsubmit' => 'return confirm("Yakin ingin menghapus data ini?")',
+                    ]) !!}
+  
+                    <button type="submit" class="btn btn-sm btn-danger">
+                      <i class="fa fa-trash"></i> Hapus
+                    </button>
+                    {!! Form::close() !!}
+  
+                </td>
+              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

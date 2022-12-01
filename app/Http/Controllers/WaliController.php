@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
+use function Ramsey\Uuid\v1;
+
 use Illuminate\Http\Request;
 use App\Models\User as Model;
-
-use function Ramsey\Uuid\v1;
 
 class WaliController extends Controller
 {
@@ -81,9 +82,9 @@ class WaliController extends Controller
    */
   public function show($id)
   {
-    $model = Model::wali()->where('id', $id)->firstOrFail();
     return view('operator.' . $this->viewShow, [
-      'model' => $model,
+      'siswa' => Siswa::whereNotIn('wali_id', [$id])->orWhere('wali_id', null)->pluck('nama', 'id'), //wherNotIn maksudnya jiak data murid sudah ada di wali maka tikda usah di tampilkan
+      'model' => Model::wali()->where('id', $id)->firstOrFail(),
       'title' => 'DEATAIL DATA WALI MURID',
     ] );
   }
