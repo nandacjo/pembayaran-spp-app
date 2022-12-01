@@ -19,6 +19,7 @@ namespace App\Models{
  * @property string|null $wali_status
  * @property string $nama
  * @property string $nisn
+ * @property string|null $foto
  * @property string $jurusan
  * @property string $kelas
  * @property string $angkatan
@@ -31,8 +32,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa search($search, $threshold = null, $entireText = false, $entireTextOnly = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa searchRestricted($search, $restriction, $threshold = null, $entireText = false, $entireTextOnly = false)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereAngkatan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereFoto($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereJurusan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereKelas($value)
@@ -63,12 +67,15 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Siswa[] $siswa
+ * @property-read int|null $siswa_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User wali()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAkses($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)

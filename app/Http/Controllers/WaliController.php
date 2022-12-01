@@ -9,10 +9,10 @@ use function Ramsey\Uuid\v1;
 
 class WaliController extends Controller
 {
-  private $viewIndex = 'user_index';
+  private $viewIndex = 'wali_index';
   private $viewCreate = 'user_form';
   private $viewEdit = 'user_form';
-  private $viewShow = 'user_show';
+  private $viewShow = 'wali_show';
   private $routePrefix = 'wali';
   /**
    * Display a listing of the resource.
@@ -24,7 +24,7 @@ class WaliController extends Controller
     // simbol <> tidak sama dengan
 
     return view('operator.' . $this->viewIndex, [
-      'models' =>   $models = Model::where('akses', 'wali')->latest()->paginate(50),
+      'models' =>   $models = Model::wali()->latest()->paginate(50),
       'routePrefix' => $this->routePrefix,
       'title' => 'DATA WALI MURID',
     ]);
@@ -81,7 +81,11 @@ class WaliController extends Controller
    */
   public function show($id)
   {
-    //
+    $model = Model::wali()->where('id', $id)->firstOrFail();
+    return view('operator.' . $this->viewShow, [
+      'model' => $model,
+      'title' => 'DEATAIL DATA WALI MURID',
+    ] );
   }
 
   /**

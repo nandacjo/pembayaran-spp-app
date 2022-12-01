@@ -23,8 +23,7 @@ class User extends Authenticatable
         'password',
         'akses',
         'nohp',
-        'nohp_verified_at'
-,
+        'nohp_verified_at',
     ];
 
     /**
@@ -45,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeWali($q)
+    {
+        return $q->where('akses', 'wali');
+    }
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'wali_id', 'id');
+    }
 }
