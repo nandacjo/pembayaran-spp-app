@@ -12,6 +12,31 @@
 
 namespace App\Models{
 /**
+ * App\Models\Biaya
+ *
+ * @property int $id
+ * @property string $nama
+ * @property int $jumlah
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $user
+ * @method static \Database\Factories\BiayaFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereJumlah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereUserId($value)
+ */
+	class Biaya extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Siswa
  *
  * @property int $id
