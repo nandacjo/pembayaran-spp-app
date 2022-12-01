@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Request;
 
 class UpdateSiswaRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateSiswaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,15 @@ class UpdateSiswaRequest extends FormRequest
      */
     public function rules()
     {
+    //    Request::segment(3);
         return [
-            //
+            'wali_id' => 'nullable',
+            'nama' => 'required',
+            'nisn' => 'required|unique:siswas,nisn,' . $this->siswa,
+            'jurusan' => 'required',
+            'kelas' => 'required',
+            'angkatan' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:5000'
         ];
     }
 }

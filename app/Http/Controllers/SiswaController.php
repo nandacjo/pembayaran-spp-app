@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSiswaRequest;
+use App\Http\Requests\UpdateSiswaRequest;
 use App\Models\User;
 
 use function Ramsey\Uuid\v1;
@@ -64,18 +66,10 @@ class SiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSiswaRequest $request)
     {
         // dd($request->all());
-        $requestData = $request->validate([
-            'wali_id' => 'nullable',
-            'nama' => 'required',
-            'nisn' => 'required|unique:siswas',
-            'jurusan' => 'required',
-            'kelas' => 'required',
-            'angkatan' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:5000'
-        ]);
+        $requestData = $request->validated();
 
         if ($request->hasFile('foto')) {
             $requestData['foto'] = $request->file('foto')->store('public');
@@ -134,17 +128,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSiswaRequest $request, $id)
     {
-        $requestData = $request->validate([
-            'wali_id' => 'nullable',
-            'nama' => 'required',
-            'nisn' => 'required|unique:siswas,nisn,' . $id,
-            'jurusan' => 'required',
-            'kelas' => 'required',
-            'angkatan' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:5000'
-        ]);
+        $requestData = $request->validated();
 
         $model = Model::findOrFail($id);
 
