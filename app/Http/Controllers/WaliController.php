@@ -83,8 +83,8 @@ class WaliController extends Controller
   public function show($id)
   {
     return view('operator.' . $this->viewShow, [
-      'siswa' => Siswa::whereNotIn('wali_id', [$id])->orWhere('wali_id', null)->pluck('nama', 'id'), //wherNotIn maksudnya jiak data murid sudah ada di wali maka tikda usah di tampilkan
-      'model' => Model::wali()->where('id', $id)->firstOrFail(),
+      'siswa' => Siswa::with('wali')->whereNotIn('wali_id', [$id])->orWhere('wali_id', null)->pluck('nama', 'id'), //wherNotIn maksudnya jiak data murid sudah ada di wali maka tikda usah di tampilkan
+      'model' => Model::with('siswa')->wali()->where('id', $id)->firstOrFail(),
       'title' => 'DEATAIL DATA WALI MURID',
     ] );
   }

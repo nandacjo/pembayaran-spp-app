@@ -31,6 +31,7 @@
               <th>JURUSAN</th>
               <th>KELAS</th>
               <th>ANGKATAN</th>
+              <th>DIBUAT OLEH</th>
             </thead>
             <tbody>
               @forelse ($models as $item)
@@ -42,6 +43,7 @@
                 <td>{{ $item->jurusan }}</td>
                 <td>{{ $item->kelas }}</td>
                 <td>{{ $item->angkatan }}</td>
+                <td>{{ $item->user->name }}</td>
                 <td>
 
                   {!! Form::open([
