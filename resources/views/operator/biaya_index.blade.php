@@ -10,15 +10,17 @@
 										<a href="{{ route($routePrefix . '.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
 										<div class="table-responsive">
 
-												{!! Form::open(['route' => $routePrefix . '.index', 'method' => 'GET']) !!}
-												<div class="input-group">
-														<input type="text" name="q" class="form-control" placeholder="Cari Data" aria-label="cari data"
-																aria-describedby="button-addon2" value="{{ request('q') }}">
-														<button type="submit" class="btn btn-outline-primary" id="button-addon2">
-																<i class="bx bx-search"></i>
-														</button>
+												<div class="d-flex justify-content-end">
+														{!! Form::open(['route' => $routePrefix . '.index', 'method' => 'GET']) !!}
+														<div class="input-group mt-2">
+																<input type="text" name="q" class="form-control" placeholder="Cari Data" aria-label="cari data"
+																		aria-describedby="button-addon2" value="{{ request('q') }}">
+																<button type="submit" class="btn btn-primary" id="button-addon2">
+																		<i class="bx bx-search"></i>
+																</button>
+														</div>
+														{!! Form::close() !!}
 												</div>
-												{!! Form::close() !!}
 
 												<table class="table-striped table">
 														<thead>
@@ -34,10 +36,9 @@
 																		<tr>
 																				<td>{{ $loop->iteration }}</td>
 																				<td>{{ $item->nama }}</td>
-																				<td>{{ formatRupiah($item->jumlah) }}</td>
+																				<td>{{ $item->formatRupiah('jumlah') }}</td>
 																				<td>{{ $item->user->name }}</td>
 																				<td>
-
 																						{!! Form::open([
 																						    'route' => [$routePrefix . '.destroy', $item->id],
 																						    'method' => 'DELETE',
