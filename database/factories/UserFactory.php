@@ -19,6 +19,9 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'nohp' => '0821' . random_int(6, 9),
+            'nohp_verified_at' => now(),
+            'akses' => 'operator',
             'email' => fake()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

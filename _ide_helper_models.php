@@ -77,6 +77,48 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Tagihan
+ *
+ * @property int $id
+ * @property int $siswa_id
+ * @property int $user_id
+ * @property int $angkatan
+ * @property int $kelas
+ * @property string $tanggal_tagihan
+ * @property string $tanggal_jatuh_tempo
+ * @property string $nama_biaya
+ * @property float $jumlah_biaya
+ * @property string|null $keterangan
+ * @property float $denda
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Siswa|null $siswa
+ * @property-read \App\Models\User|null $user
+ * @method static \Database\Factories\TagihanFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereAngkatan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereDenda($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereJumlahBiaya($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereKelas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereKeterangan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereNamaBiaya($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereSiswaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereTanggalJatuhTempo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereTanggalTagihan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereUserId($value)
+ */
+	class Tagihan extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id

@@ -11,7 +11,6 @@
           'route' => $route, 
           'method' => $method, 
           ]) !!}
-
        
         <div class="form-group mt-1"> 
           <label for="nama">Nama Biaya</label>

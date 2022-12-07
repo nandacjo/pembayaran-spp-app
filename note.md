@@ -40,3 +40,37 @@ Pertemuan 30
 1. menambahkan perparing input for validtion di form request biaya
 2. guananya untuk menghilangkan titik yang ada di inputan jumlah
 3. nama functionnya adalah prepareForValidaton
+
+Pertemuan 31
+1. Menggunkan event elquent
+2. Contohnya di bagina user_id
+3. Dipndahkan ke dalam model, agar otomatis terload ketika menambahkan atau update data
+4. Jadi tidak perlua lagi membuatnya di controller
+4. Nama functionnya adalah, createing untuk create data
+5. Updating untuk update data
+
+Pertemuan 32
+1. Membuat function helper untuk format rupiah
+2. Setelah di buat tambahkan files di composer.json agar helpernya terload
+3. Setelah itu tinggal panggil
+
+Pertemuan 33
+1. Membaur sebauh Traits
+2. Letaknya di dalam folder app, buat sebuah folder dengan nama Traits
+3. Lalu buat sebuah class atau train dengan nama HasFormatRupiah
+4. Setelah itu panggil trait di dalam model Biaya dengan perinta use
+5. Setelah di panggil tinggal di gunakan function yang berada di Traits tersebut
+
+Pertemuan 34
+1. Membuat tabel Tagihan siswa
+
+Pertemuan 35
+1. Menambahka colum kelas
+2. Namun harus di rollback terbeih dahulu, dengan perinta
+3. php artisn migrate:status untuk lihat status migrate
+4. php artisan migrate:rollback --step=1, untu menghapus migrate sebelumnya 
+5. php artisan migrate kembali.
+
+
+Pertemuan 36
+1. 
