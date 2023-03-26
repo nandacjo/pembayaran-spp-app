@@ -36,8 +36,8 @@
               </tr>
             </thead>
           </table>
-          
-          {{--  Form tambah data siswa  --}}
+
+          {{-- Form tambah data siswa --}}
           <h5 class="my-3">TAMBAH DATA ANAK</h5>
           {!! Form::open(['route' => 'walisiswa.store', 'method' => 'POST']) !!}
           {!! Form::hidden('wali_id', $model->id, []) !!}
@@ -48,7 +48,7 @@
           </div>
           {!! Form::submit('SIMPAN', ['class' => 'btn btn-sm btn-primary my-2']) !!}
           {!! Form::close() !!}
-          {{--  end from tambah data siswa  --}}
+          {{-- end from tambah data siswa --}}
 
 
           <h5 class="my-4">DATA ANAK</h5>
@@ -69,16 +69,16 @@
                 <td>{{ $item->nama }}</td>
                 <td>
                   {!! Form::open([
-                    'route' => ['walisiswa.update', $item->id],
-                    'method' => 'PUT',
-                    'onsubmit' => 'return confirm("Yakin ingin menghapus data ini?")',
-                    ]) !!}
-  
-                    <button type="submit" class="btn btn-sm btn-danger">
-                      <i class="fa fa-trash"></i> Hapus
-                    </button>
-                    {!! Form::close() !!}
-  
+                  'route' => ['walisiswa.update', $item->id],
+                  'method' => 'PUT',
+                  'onsubmit' => 'return confirm("Yakin ingin menghapus data ini?")',
+                  ]) !!}
+
+                  <button type="submit" class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash"></i> Hapus
+                  </button>
+                  {!! Form::close() !!}
+
                 </td>
               </tr>
               @endforeach

@@ -116,6 +116,12 @@
               <div data-i18n="Basic">Data User</div>
             </a>
           </li>
+          <li class="menu-item {{ \Route::is('banksekolah.*') ? 'active' : '' }}">
+            <a href="{{ route('banksekolah.index') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <div data-i18n="Basic">Rekening Sekolah</div>
+            </a>
+          </li>
 
           <li class="menu-item {{ \Route::is('wali.*') ? 'active' : '' }}">
             <a href="{{ route('wali.index') }}" class="menu-link">
@@ -254,14 +260,14 @@
         <div class="content-wrapper">
           <!-- Content -->
 
-          <div class="container-xxl flex-grow-1 container-p-y"> 
-            {{--  menampilkan error secara global  --}}
+          <div class="container-xxl flex-grow-1 container-p-y">
+            {{-- menampilkan error secara global  --}}
             @if($errors->any())
-              <div class="alert alert-danger">
-                {!! implode('', $errors->all('<div>:message</div>')) !!}
-              </div>
+            <div class="alert alert-danger">
+              {!! implode('', $errors->all('<div>:message</div>')) !!}
+            </div>
             @endif
-            {{--  end  --}}
+            {{-- end  --}}
             @include('flash::message')
             @yield('content')
           </div>

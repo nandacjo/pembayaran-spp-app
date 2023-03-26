@@ -7,21 +7,31 @@
       <h5 class="card-header">{{ $title }}</h5>
 
       <div class="card-body">
-        <a href="{{ route( $routePrefix .'.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
-        <div class="table-responsive">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <a href="{{ route( $routePrefix .'.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
+          </div>
 
-
+          {{-- Tombol Cari --}}
           {!! Form::open(['route' => $routePrefix . '.index', 'method' => 'GET']) !!}
           <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Cari Nama Siswa" aria-label="cari nama" aria-describedby="button-addon2" value="{{ 
-                request('q')
-             }}">
-            <button type="submit" class="btn btn-outline-primary" id="button-addon2">
-              <i class="bx bx-search"></i>
+            <input type="text" name="q" class="form-control form-control-sm" placeholder="Cari Nama Siswa"
+              aria-label="cari nama" aria-describedby="button-addon2" value="{{ 
+                  request('q')
+                }}">
+            <button type="submit" class="btn btn-sm btn-primary" id="button-addon2">
+              <i class="bx bx-search"></i> Cari
             </button>
           </div>
           {!! Form::close() !!}
+          {{-- End Tombol Cari --}}
 
+        </div>
+
+
+        <div class="table-responsive">
+
+          {{-- Table --}}
           <table class="table table-striped">
             <thead>
               <th>No</th>
@@ -51,8 +61,10 @@
                   'method' => 'DELETE',
                   'onsubmit' => 'return confirm("Yakin ingin menghapus data ini?")',
                   ]) !!}
-                  <a href="{{ route( $routePrefix . '.edit', $item->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-edit"></i> Edit </a>
-                  <a href="{{ route( $routePrefix . '.show', $item->id) }}" class="btn btn-info btn-sm"> <i class="fa fa-edit"></i> Detail </a>
+                  <a href="{{ route( $routePrefix . '.edit', $item->id) }}" class="btn btn-success btn-sm"> <i
+                      class="fa fa-edit"></i> Edit </a>
+                  <a href="{{ route( $routePrefix . '.show', $item->id) }}" class="btn btn-info btn-sm"> <i
+                      class="fa fa-edit"></i> Detail </a>
 
                   <button type="submit" class="btn btn-sm btn-danger">
                     <i class="fa fa-trash"></i> Hapus
@@ -67,6 +79,8 @@
               @endforelse
             </tbody>
           </table>
+          {{-- End Table --}}
+
           {!! $models->links() !!}
         </div>
       </div>

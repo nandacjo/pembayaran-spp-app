@@ -13,159 +13,160 @@ use Illuminate\Support\Facades\Storage;
 
 class SiswaController extends Controller
 {
-    private $viewIndex = 'siswa_index';
-    private $viewCreate = 'siswa_form';
-    private $viewEdit = 'siswa_form';
-    private $viewShow = 'siswa_show';
-    private $routePrefix = 'siswa';
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        // simbol <> tidak sama dengan
-        // Model::query();
+  private $viewIndex = 'siswa.siswa_index';
+  private $viewCreate = 'siswa.siswa_form';
+  private $viewEdit = 'siswa.siswa_form';
+  private $viewShow = 'siswa.siswa_show';
+  private $routePrefix = 'siswa';
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index(Request $request)
+  {
+    // simbol <> tidak sama dengan
+    // Model::query();
 
-        if($request->filled('q')){
-            $models = Model::search($request->q)->paginate(50);
-        }else {
-            $models = Model::with('wali', 'user')->latest()->paginate(50);
-        }
-
-        return view('operator.' . $this->viewIndex, [
-            'models' =>   $models,
-            'routePrefix' => $this->routePrefix,
-            'title' => 'DATA SISWA',
-        ]);
+    if ($request->filled('q')) {
+      $models = Model::search($request->q)->paginate(50);
+    } else {
+      $models = Model::with('wali', 'user')->latest()->paginate(50);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $data = [
-            'model' => new Model(),
-            'method' => 'POST',
-            'route' => $this->routePrefix . '.store',
-            'button' => 'SIMPAN',
-            'title' => 'FORM DATA SISWA',
-            'wali' => User::where('akses', 'wali')->pluck('name', 'id'),
-        ];
+    return view('operator.' . $this->viewIndex, [
+      'models' =>   $models,
+      'routePrefix' => $this->routePrefix,
+      'title' => 'DATA SISWA',
+    ]);
+  }
 
-        return view('operator.' . $this->viewCreate, $data);
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    $data = [
+      'model' => new Model(),
+      'method' => 'POST',
+      'route' => $this->routePrefix . '.store',
+      'button' => 'SIMPAN',
+      'title' => 'FORM DATA SISWA',
+      'wali' => User::where('akses', 'wali')->pluck('name', 'id'),
+    ];
+
+    return view('operator.' . $this->viewCreate, $data);
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(StoreSiswaRequest $request)
+  {
+    // dd($request->all());
+    $requestData = $request->validated();
+
+    if ($request->hasFile('foto')) {
+      $requestData['foto'] = $request->file('foto')->store('public');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSiswaRequest $request)
-    {
-        // dd($request->all());
-        $requestData = $request->validated();
-
-        if ($request->hasFile('foto')) {
-            $requestData['foto'] = $request->file('foto')->store('public');
-        }
-
-        if ($request->filled('wali_id')) {
-            $requestData['wali_status'] = 'ok';
-        }
-
-        $requestData['user_id'] = auth()->user()->id;
-
-        Model::create($requestData);
-        flash('Data berhasil disimpan');
-        return back();
+    if ($request->filled('wali_id')) {
+      $requestData['wali_status'] = 'ok';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return view('operator.siswa_show', [
-            'model' => Model::findOrFail($id),
-            'title' => 'DETAIL SISWA',
-        ]);
+    $requestData['user_id'] = auth()->user()->id;
+
+    Model::create($requestData);
+    flash('Data berhasil disimpan');
+    return back();
+  }
+
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+    return view('operator.' . $this->viewShow, [
+      'model' => Model::findOrFail($id),
+      'title' => 'DETAIL SISWA',
+    ]);
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+    $data = [
+      'model' => Model::findOrFail($id),
+      'method' => 'PUT',
+      'route' => [$this->routePrefix . '.update', $id],
+      'button' => 'UPDATE',
+      'title' => 'EDIT DATA SISWA',
+      'wali' => User::where('akses', 'wali')->pluck('name', 'id'),
+
+    ];
+
+    return view('operator.' . $this->viewEdit, $data);
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(UpdateSiswaRequest $request, $id)
+  {
+    $requestData = $request->validated();
+
+    $model = Model::findOrFail($id);
+
+    if ($request->hasFile('foto')) {
+      Storage::delete($model->foto);
+      $requestData['foto'] = $request->file('foto')->store('public');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $data = [
-            'model' => Model::findOrFail($id),
-            'method' => 'PUT',
-            'route' => [$this->routePrefix . '.update', $id],
-            'button' => 'UPDATE',
-            'title' => 'EDIT DATA SISWA',
-            'wali' => User::where('akses', 'wali')->pluck('name', 'id'),
-
-        ];
-
-        return view('operator.' . $this->viewEdit, $data);
+    if ($request->filled('wali_id')) {
+      $requestData['wali_status'] = 'ok';
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateSiswaRequest $request, $id)
-    {
-        $requestData = $request->validated();
+    $requestData['user_id'] = auth()->user()->id;
 
-        $model = Model::findOrFail($id);
+    $model->fill($requestData);
+    $model->save();
+    flash('Data berhasil diubah');
+    return back();
+  }
 
-        if ($request->hasFile('foto')) {
-            Storage::delete($model->foto);
-            $requestData['foto'] = $request->file('foto')->store('public');
-        }
-
-        if ($request->filled('wali_id')) {
-            $requestData['wali_status'] = 'ok';
-        }
-
-        $requestData['user_id'] = auth()->user()->id;
-
-        $model->fill($requestData);
-        $model->save();
-        flash('Data berhasil diubah');
-        return back();
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy($id)
+  {
+    $model = Model::firstOrFail();
+    if ($model->foto != null) {
+      Storage::delete($model->foto);
     }
+    $model->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $model = Model::firstOrFail();
-        if ($model->foto != null) {
-            Storage::delete($model->foto);
-        }
-        $model->delete();
-       
-        flash('Data berhsil dihapus');
-        return back();
-    }
+    flash('Data berhsil dihapus');
+    return back();
+  }
 }

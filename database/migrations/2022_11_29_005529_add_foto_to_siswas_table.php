@@ -6,27 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('siswas', function (Blueprint $table) {
-            $table->string('foto')->after('nisn')->nullable();
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::table('siswas', function (Blueprint $table) {
+      $table->string('foto')->after('nisn')->nullable();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('siswa', function (Blueprint $table) {
-            $table->dropColumn('foto');
-        });
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::table('siswa', function (Blueprint $table) {
+      $table->dropColumn('foto');
+    });
+  }
 };

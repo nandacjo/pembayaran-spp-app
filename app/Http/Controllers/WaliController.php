@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
-use function Ramsey\Uuid\v1;
-
 use Illuminate\Http\Request;
 use App\Models\User as Model;
 
 class WaliController extends Controller
 {
-  private $viewIndex = 'wali_index';
-  private $viewCreate = 'user_form';
+  private $viewIndex = 'wali.wali_index';
+  private $viewCreate = 'user.user_form';
   private $viewEdit = 'user_form';
   private $viewShow = 'wali_show';
   private $routePrefix = 'wali';
@@ -25,7 +23,7 @@ class WaliController extends Controller
     // simbol <> tidak sama dengan
 
     return view('operator.' . $this->viewIndex, [
-      'models' =>   $models = Model::wali()->latest()->paginate(50),
+      'models' =>   Model::wali()->latest()->paginate(50),
       'routePrefix' => $this->routePrefix,
       'title' => 'DATA WALI MURID',
     ]);
@@ -82,11 +80,11 @@ class WaliController extends Controller
    */
   public function show($id)
   {
-    return view('operator.' . $this->viewShow, [
+    return view('operator.wali.' . $this->viewShow, [
       'siswa' => Siswa::with('wali')->whereNotIn('wali_id', [$id])->orWhere('wali_id', null)->pluck('nama', 'id'), //wherNotIn maksudnya jiak data murid sudah ada di wali maka tikda usah di tampilkan
       'model' => Model::with('siswa')->wali()->where('id', $id)->firstOrFail(),
       'title' => 'DEATAIL DATA WALI MURID',
-    ] );
+    ]);
   }
 
   /**
@@ -103,10 +101,8 @@ class WaliController extends Controller
       'route' => [$this->routePrefix . '.update', $id],
       'button' => 'UPDATE',
       'title' => 'EDIT DATA WALI MURID'
-
     ];
-
-    return view('operator.' . $this->viewEdit, $data);
+    return view('operator.wali.' . $this->viewEdit, $data);
   }
 
   /**
@@ -146,7 +142,7 @@ class WaliController extends Controller
   public function destroy($id)
   {
     $model = Model::where('akses', 'wali')->firstOrFail();
-
+    dd($model);
     $model->delete();
     flash('Data berhsil dihapus');
     return back();

@@ -12,13 +12,15 @@ class Biaya extends Model
     use HasFactory, HasFormatRupiah;
     
     protected $guarded = [];
-    protected $append = ['nama_biaya_full'];
+    protected $append = ['nama_biaya_full']; // custom attribute
 
     /**
      * Get the user's first name.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
+
+    //  custom attribute
     protected function namaBiayaFull(): Attribute
     {
         return Attribute::make(
@@ -31,6 +33,7 @@ class Biaya extends Model
         return $this->belongsTo(User::class);
     }
     
+    // even elquent, ini akan deksekusi ketika data di create atau di update, sebelum di create atau di update maka data user di masukan terlebih dahulu sebelum disimpan
     protected static function booted()
     {
         static::creating(function ($biaya) {

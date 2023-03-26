@@ -12,6 +12,49 @@
 
 namespace App\Models{
 /**
+ * Bank Model.
+ *
+ * @property int $id
+ * @property string $sandi_bank
+ * @property string $nama_bank
+ * @method static \Illuminate\Database\Eloquent\Builder|Bank newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bank newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bank query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bank whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bank whereNamaBank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bank whereSandiBank($value)
+ */
+	class Bank extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BankSekolah
+ *
+ * @property int $id
+ * @property string $kode
+ * @property string $nama_bank
+ * @property string $nama_rekening
+ * @property string $nomor_rekening
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\BankSekolahFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereKode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereNamaBank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereNamaRekening($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereNomorRekening($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankSekolah whereUpdatedAt($value)
+ */
+	class BankSekolah extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Biaya
  *
  * @property int $id
@@ -33,6 +76,42 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Biaya whereUserId($value)
  */
 	class Biaya extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Pembayaran
+ *
+ * @property int $id
+ * @property int $tagihan_id
+ * @property int $wali_id
+ * @property \Illuminate\Support\Carbon $tanggal_bayar
+ * @property string|null $status_konfirmasi
+ * @property float $jumlah_dibayar
+ * @property string|null $bukti_bayar
+ * @property string $metode_pembayaran
+ * @property int|null $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Tagihan|null $tagihan
+ * @property-read \App\Models\User|null $user
+ * @method static \Database\Factories\PembayaranFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereBuktiBayar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereJumlahDibayar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereMetodePembayaran($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereStatusKonfirmasi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereTagihanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereTanggalBayar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereWaliId($value)
+ */
+	class Pembayaran extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -82,31 +161,32 @@ namespace App\Models{
  * @property int $id
  * @property int $siswa_id
  * @property int $user_id
- * @property int $angkatan
- * @property int $kelas
- * @property string $tanggal_tagihan
- * @property string $tanggal_jatuh_tempo
- * @property string $nama_biaya
- * @property float $jumlah_biaya
+ * @property int|null $angkatan
+ * @property int|null $kelas
+ * @property \Illuminate\Support\Carbon $tanggal_tagihan
+ * @property \Illuminate\Support\Carbon $tanggal_jatuh_tempo
  * @property string|null $keterangan
- * @property float $denda
+ * @property float|null $denda
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Pembayaran[] $pembayaran
+ * @property-read int|null $pembayaran_count
  * @property-read \App\Models\Siswa|null $siswa
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TagihanDetail[] $tagihanDetails
+ * @property-read int|null $tagihan_details_count
  * @property-read \App\Models\User|null $user
  * @method static \Database\Factories\TagihanFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tagihan waliSiswa()
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereAngkatan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereDenda($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereJumlahBiaya($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereKelas($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereKeterangan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereNamaBiaya($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereSiswaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereTanggalJatuhTempo($value)
@@ -115,6 +195,30 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Tagihan whereUserId($value)
  */
 	class Tagihan extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TagihanDetail
+ *
+ * @property int $id
+ * @property int $tagihan_id
+ * @property string $nama_biaya
+ * @property int $jumlah_biaya
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\TagihanDetailFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail whereJumlahBiaya($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail whereNamaBiaya($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail whereTagihanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TagihanDetail whereUpdatedAt($value)
+ */
+	class TagihanDetail extends \Eloquent {}
 }
 
 namespace App\Models{
